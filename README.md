@@ -1,6 +1,6 @@
 # Retail Customer Segmentation Using RFM Analysis and KMeans Clustering (Ongoing Project) 
 
-This project implements `****RFM (Recency, Frequency, Monetary) Analysis****` along with `****KMeans Clustering****` to segment customers based on their purchasing behavior. The analysis helps businesses identify valuable customer groups, improve marketing strategies, and enhance customer retention.
+This project implements `RFM (Recency, Frequency, Monetary) Analysis` along with `KMeans Clustering` to segment customers based on their purchasing behavior. The analysis helps businesses identify valuable customer groups, improve marketing strategies, and enhance customer retention.
 
 ---
 
