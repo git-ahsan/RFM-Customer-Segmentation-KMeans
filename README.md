@@ -5,13 +5,13 @@ This project implements RFM (Recency, Frequency, Monetary) Analysis along with K
 ---
 
 ## 🎯 Project Objective
-To understand customer purchase behavior using historical transaction data.
+📊 To understand customer purchase behavior using historical transaction data.
 
-To calculate RFM metrics and use them to cluster customers into distinct segments.
+👥 To calculate RFM metrics and use them to cluster customers into distinct segments.
 
-To identify high-value customers and offer actionable insights for business decision-making.
+💎 To identify high-value customers and offer actionable insights for business decision-making.
 
-To visualize the clustering results and support data-driven marketing strategies.
+📈 To visualize the clustering results and support data-driven marketing strategies.
 
 ---
 
