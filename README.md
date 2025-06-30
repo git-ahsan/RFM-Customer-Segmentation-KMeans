@@ -87,3 +87,11 @@ df = pd.read_csv("Retail Customer Data 2009-10.csv", encoding='unicode_escape')
 df
 ```
 
+### 🔹 Step 3: Check Data Types of Each Column
+
+Before performing any transformation or analysis, it's important to understand the data types of each column in the dataset. This ensures the right operations are applied to each feature.
+
+```python
+df.dtypes
+```
+
