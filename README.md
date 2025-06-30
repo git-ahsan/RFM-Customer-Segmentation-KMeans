@@ -24,3 +24,32 @@ This project implements **RFM (Recency, Frequency, Monetary) Analysis** along wi
 | Visualization        | Matplotlib, Seaborn                |
 | Machine Learning     | Scikit-learn (KMeans), Yellowbrick |
 | IDE                  | Jupyter Notebook / Google Colab    |
+
+---
+
+## 📊 Dataset Description
+
+The dataset used in this project is a **retail transaction dataset** containing historical sales data from an online retailer between **December 1, 2009** and **December 9, 2010**.
+
+Key characteristics:
+
+- **Total Records:** ~500,000 transactions
+- **File Name:** `Retail Customer Data 2009-10.csv`
+- **Format:** CSV
+
+### Features:
+
+| Column Name     | Description                                                                 |
+|-----------------|-----------------------------------------------------------------------------|
+| `Invoice No`     | Unique identifier for each transaction                                      |
+| `Stock Code`     | Product (item) code                                                         |
+| `Product Description`   | Product name                                                                |
+| `Quantity`      | The number of items purchased per transaction                               |
+| `Invoice Date`   | Date and time when the invoice was generated                                |
+| `Unit Price`     | Price per unit of the product                                               |
+| `Customer ID`    | Unique customer identifier                                                  |
+| `Country`       | Country name where the customer resides                                     |
+
+> 🛠️ Note: Rows with missing `CustomerID` were dropped to ensure clean customer segmentation.
+
+From this dataset, **RFM (Recency, Frequency, Monetary)** features were derived to perform customer segmentation analysis using clustering techniques.
