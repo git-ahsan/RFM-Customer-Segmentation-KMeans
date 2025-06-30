@@ -55,3 +55,35 @@ Key characteristics:
 > 🛠️ Note: Rows with missing `CustomerID` were dropped to ensure clean customer segmentation.
 
 From this dataset, **RFM (Recency, Frequency, Monetary)** features were derived to perform customer segmentation analysis using clustering techniques.
+
+---
+
+## 📈 Methodology / Workflow
+
+This project follows a structured pipeline to perform customer segmentation using RFM analysis and KMeans clustering:
+
+---
+
+### 🔹 Step 1: Importing Required Libraries
+
+In this step, we import all the essential Python libraries and modules required for data loading, analysis, visualization, and clustering.
+
+```python
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+from yellowbrick.cluster import KElbowVisualizer
+```
+
+### 🔹 Step 2: Load and Inspect the Dataset
+
+The dataset is loaded using `pandas.read_csv()` with appropriate encoding to handle special characters. Initial inspection is done to understand the structure and shape of the data.
+
+```python
+df = pd.read_csv("Retail Customer Data 2009-10.csv", encoding='unicode_escape')
+df
+```
+
