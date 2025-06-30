@@ -29,14 +29,14 @@ This project implements **RFM (Recency, Frequency, Monetary) Analysis** along wi
 
 ## 📊 Dataset Description
 
-📁 CSV File: [Retail Customer Data](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/Retail%20Customer%20Data%202009-10.zip)
+📁 CSV File: [Retail Customer Data]
 
 The dataset used in this project is a **retail transaction dataset** containing historical sales data from an online retailer between **December 1, 2009** and **December 9, 2010**.
 
 Key characteristics:
 
 - **Total Records:** ~500,000 transactions
-- **File Name:** `Retail Customer Data 2009-10.csv`
+- **File Name:** [Retail Customer Data 2009-10.csv](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/Retail%20Customer%20Data%202009-10.zip)
 - **Format:** CSV
 
 ### Features:
