@@ -120,17 +120,17 @@ df.dtypes
 
 Before performing RFM analysis, we must remove incomplete records. Customer ID is critical for segmentation, so entries without it are excluded.
 
-● At first checked initial dataset shape using .shape
+###### ● At first checked initial dataset shape using .shape
 ```python
 df.shape
 ```
 
-● Identified missing values in all columns using .isnull().sum(), where Found that some records had missing Customer ID and Product Description.
+###### ● Identified missing values in all columns using .isnull().sum(), where Found that some records had missing Customer ID and Product Description.
 ```python
 df.isnull().sum()
 ```
 
-● Removed only those Customer ID records using dropna() and Re-checked dataset shape to confirm the number of valid entries
+###### ● Removed only those Customer ID records using dropna() and Re-checked dataset shape to confirm the number of valid entries
 ```python
 df = df.dropna(subset=["Customer ID"])
 df.shape
