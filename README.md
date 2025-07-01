@@ -95,3 +95,43 @@ Before performing any transformation or analysis, it's important to understand t
 df.dtypes
 ```
 
+### 🔹 Step 4: Convert Invoice Date and Set Reference Date
+
+To prepare for RFM (Recency, Frequency, Monetary) analysis, we must ensure the `Invoice Date` column is in datetime format. We also set a fixed reference date (`CurrentDate`) to calculate **Recency** later on.
+
+**Used .tail() to inspect the last few transactions**
+```python
+df.tail(5)
+```
+
+**Set a custom Current Date to calculate how recently each customer made a purchase**
+```python
+CurrentDate = pd.to_datetime("2011-01-01")
+CurrentDate
+```
+
+**Converted Invoice Date from object to datetime64[ns] using pd.to_datetime(). Then Verified the conversion using .dtypes**
+```python
+df["Invoice Date"] = pd.to_datetime(df["Invoice Date"])
+df.dtypes
+```
+
+### 🔹 Step 5: Identify and Remove Missing Customer IDs
+
+Before performing RFM analysis, we must remove incomplete records. Customer ID is critical for segmentation, so entries without it are excluded.
+
+**At first checked initial dataset shape using .shape**
+```python
+df.shape
+```
+
+**Identified missing values in all columns using .isnull().sum(), where Found that some records had missing Customer ID and Product Description**
+```python
+df.isnull().sum()
+```
+
+**Removed only those Customer ID records using dropna() and Re-checked dataset shape to confirm the number of valid entries**
+```python
+df = df.dropna(subset=["Customer ID"])
+df.shape
+```
