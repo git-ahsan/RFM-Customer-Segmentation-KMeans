@@ -328,10 +328,10 @@ RFM.Clusters.unique()
 To better understand the distribution of customer clusters, a 3D scatter plot was generated to visualize customer clusters based on their **Recency**, **Frequency**, and **Monetary** (RFM) values. This plot, created using matplotlib's 3D projection, maps Recency to the X-axis, Frequency to the Y-axis, and Monetary to the Z-axis. Each customer cluster is differentiated by color using the "Accent" colormap, allowing for a clear visual separation of segments across all three RFM dimensions. The axes are labeled and a grid is enabled to enhance readability, ultimately helping to validate the quality of the customer clustering.
 
 ```python
-fig = plt.figure(figsize=(12, 9), facecolor="#E6F9FA")   #Creates Matplotlib figure with a light background.
-ax = fig.add_subplot(111, projection='3d', label="bla")   #adds a 3D subplot to the figure.
+fig = plt.figure(figsize=(12, 9), facecolor="#E6F9FA")   ###Creates Matplotlib figure with a light background.
+ax = fig.add_subplot(111, projection='3d', label="bla")  ###adds a 3D subplot to the figure.
 
-######creates a 3D scatter plot of RFM data.
+###creates a 3D scatter plot of RFM data.
 scatter = ax.scatter(
     RFM["Recency"], 
     RFM["Frequency"], 
@@ -341,9 +341,9 @@ scatter = ax.scatter(
     s=60, 
     edgecolor='k', 
     alpha=0.8
-) ######creates a 3D scatter plot of RFM data.
+)
 
-######Titles and labels the 3D plot axes.
+###Titles and labels the 3D plot axes.
 ax.set_title("3D Clustering of Customers (RFM)", fontsize=16, fontweight='bold')
 ax.set_xlabel("Recency", fontsize=12, fontweight='bold')
 ax.set_ylabel("Frequency", fontsize=12, fontweight='bold')
@@ -352,4 +352,108 @@ ax.grid(True)            #Titles and labels the 3D plot axes.
 
 plt.tight_layout()
 plt.show()
+```
+
+### 🔹 Step 17: Analyze and Profile Each Customer Cluster
+
+After clustering, each segment is analyzed to uncover customer behavior patterns based on Recency, Frequency, and Monetary values. By filtering the RFM dataset for each cluster (0, 1, 2, 3), distinct profiles can be identified — such as customers with low recency and high monetary value (likely loyal or VIPs), those with high recency and low frequency (possibly inactive or at-risk), and others with moderate values (average or developing customers). This interpretation helps transform raw clusters into meaningful business personas for data-driven marketing strategies.
+
+```python
+RFM[RFM.Clusters == 0]
+RFM[RFM.Clusters == 1]
+RFM[RFM.Clusters == 2]
+RFM[RFM.Clusters == 3]
+```
+
+### 🔹 Step 18: Summarize RFM Metrics by Cluster
+
+To better understand each customer segment, the average Recency, Frequency, and Monetary values were calculated for every cluster. This aggregated view reveals the overall behavior of each group — such as how recently customers purchased, how often they buy, and how much they typically spend. These cluster-wise summaries serve as the foundation for assigning intuitive labels like “VIP,” “At-Risk,” or “Potential Loyalists,” making the segmentation actionable for strategic business decisions.
+
+```python
+final = RFM.groupby("Clusters").mean()[["Recency", "Frequency", "Monetary"]]
+final
+```
+
+### 🔹 Step 19: Assign Descriptive Labels to Customer Segments
+
+To make the cluster segments more interpretable for business users, numeric cluster labels were mapped to descriptive names — such as “Diamond,” “Gold,” “Silver,” and “Bronze” — based on their average RFM scores. A custom function was applied row-wise to assign each customer to a group, enabling clearer communication of customer value and facilitating targeted marketing strategies aligned with each segment’s behavior.
+
+```python
+def func(row):
+    if row["Clusters"] == 2:
+        return 'Diamond'
+    elif row["Clusters"] == 3:
+        return 'Gold'
+    elif row["Clusters"] == 0:
+        return 'Silver'
+    else:
+        return 'Bronze'
+
+RFM['Group'] = RFM.apply(func, axis=1)
+RFM
+```
+
+### 🔹 Step 20: Count Customers in Each Segment
+
+To understand how customers are distributed across the defined segments, the number of customers in each group (Diamond, Gold, Silver, Bronze) was calculated using value_counts(). The result was converted into a DataFrame and reset with a new index, making it suitable for reporting, visualization, and further analysis. This summary helps evaluate which segments are dominant and where targeted marketing or improvement strategies should focus.
+
+```python
+result = pd.DataFrame(RFM.Group.value_counts())
+result = result.reset_index()
+result
+```
+
+### 🔹 Step 21: Visualize Customer Segmentation Results
+
+To visually represent the results of customer segmentation, a combined chart was created using Matplotlib and Seaborn. The bar chart (on a log scale) shows the absolute count of customers per group, while the donut chart displays the percentage share of each segment. Custom colors and annotations were applied for clarity and visual appeal. Together, these charts provide a clear, interpretable overview of how customers are distributed across the Diamond, Gold, Silver, and Bronze segments.
+
+```python
+Group = result["Group"]
+Count = result["count"]
+Customcolors = ["#81DED0", "#FA667E", "#FED315", "#461856"]
+
+# Create a figure with two subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+
+# Bar Chart
+sns.barplot(x=Group, y=Count, hue=Group, palette=Customcolors, ax=ax1, legend=False)
+ax1.set_yscale('log')
+ax1.set_title("Bar Chart (Log Scale)", fontsize=16, fontweight='bold')
+ax1.set_xlabel("Customer Group", fontsize=12, fontweight='bold')
+ax1.set_ylabel("Log Count", fontsize=12, fontweight='bold')
+
+for container in ax1.containers:
+    ax1.bar_label(container, fontsize=10, fontweight='bold')
+
+# Donut (Pie) Chart
+wedges, texts, autotexts = ax2.pie(
+    Count,
+    labels=Group,
+    colors=Customcolors,
+    autopct='%1.1f%%',
+    startangle=0,
+    wedgeprops=dict(width=0.6)
+)
+ax2.set_title("Donut Chart (Percentage)", fontsize=16, fontweight='bold')
+plt.setp(autotexts, size=10, weight="bold", color="Black")
+
+plt.suptitle("Customer Group Distribution Analysis", fontsize=20, fontweight='bold', color='navy')
+plt.tight_layout()
+plt.show()
+```
+
+### 🔹 Step 22: Identify Highest and Lowest Monetary Value Customers by Segment
+
+To explore spending extremes within customer segments, the dataset was filtered by cluster and sorted by the Monetary value. This helped identify both the highest-value and lowest-value customers within specific groups, such as Cluster 2 (Diamond) and Cluster 1 (Bronze). These insights are useful for designing personalized loyalty programs, upselling strategies, or retention efforts targeting high- and low-value customers individually.
+
+```python
+### Analyze Cluster 2 (Diamond)
+ABC = RFM[RFM.Clusters == 2]
+ABC[ABC['Monetary'] == ABC['Monetary'].min()]  # Lowest spender in Cluster 2 (Diamond)
+ABC[ABC['Monetary'] == ABC['Monetary'].max()]  # Highest spender in Cluster 2 (Diamond)
+
+# Analyze Cluster 1 (Bronze)
+ABC = RFM[RFM.Clusters == 1]
+ABC[ABC['Monetary'] == ABC['Monetary'].min()]  # Lowest spender in Cluster 1 (Bronze)
+ABC[ABC['Monetary'] == ABC['Monetary'].max()]  # Highest spender in Cluster 1 (Bronze)
 ```
