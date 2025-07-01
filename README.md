@@ -289,16 +289,36 @@ elbow.fit(scaled)
 elbow.show()
 ```
 
-### 🔹 Step 14: Fit Final KMeans Model Using Optimal k
+### 🔹 Step 14: Fit KMeans Model with Optimal Number of Clusters-k
 
-After determining that `k=4` is the optimal number of clusters using the Elbow Method, I applied KMeans clustering to the scaled RFM data.
-A KMeans model was initialized with `n_clusters=4` and `random_state=42` to ensure reproducible results. The model was then trained on the scaled RFM data. Subsequently, **cluster labels** were retrieved for each customer, with verification confirming that every customer received a cluster assignment.
-Each customer is now assigned to one of the four clusters, categorizing them based on their Recency, Frequency, and Monetary behavior.
+The KMeans model was instantiated with 4 clusters, reflecting the elbow analysis. A `random_state of 42` was set to ensure consistent results across all executions. The model was then trained on the scaled RFM data to delineate distinct customer segments.
 
 ```python
 kmeans = KMeans(n_clusters=4, random_state=42)
 kmeans.fit(scaled)
 ```
+
+### 🔹 Step 15: Assign Cluster Labels to Customers
+
+After training the final KMeans model, I assigned each customer to a cluster by attaching the predicted labels to the RFM table.
+
+###### Used kmeans.labels_ to extract cluster predictions for each customer.
+```python
 kmeans.labels_
+```
+
+###### Verified the number of labels matched the number of customers.
+```python
 kmeans.labels_.shape
+```
+
+###### Added a new column `Clusters` to the RFM DataFrame to store the segment each customer belongs to.
+```python
+RFM["Clusters"] = kmeans.labels_  # Assign labels to RFM table
+RFM
+```
+
+###### Checked the distinct cluster labels (e.g., 0, 1, 2, 3)
+```python
+RFM.Clusters.unique()
 ```
