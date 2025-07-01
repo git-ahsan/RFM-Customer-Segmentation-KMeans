@@ -202,7 +202,7 @@ Monetary
 
 After calculating the three individual metrics, we combine them into a single DataFrame for customer segmentation analysis.
 
-###### Used pd.concat() to join the **Recency, Frequency,** and **Monetary** DataFrames side-by-side
+###### Used pd.concat() to join the Recency, Frequency, and Monetary DataFrames side-by-side
 ```python
 RFM = pd.concat([Recency, Frequency, Monetary], axis=1)
 ```
@@ -211,4 +211,94 @@ RFM = pd.concat([Recency, Frequency, Monetary], axis=1)
 ```python
 RFM.columns = ['Recency', 'Frequency', 'Monetary']
 RFM
+```
+
+### 🔹 Step 10: Scale the RFM Features for Clustering
+
+Before applying KMeans clustering, it's essential to standardize the RFM values to ensure that each feature contributes equally to the distance calculations.
+This step utilizes `StandardScaler` from `sklearn.preprocessing` to perform the scaling.
+
+RFM features have different units and value ranges (e.g., Recency in days, Monetary in currency). If left unscaled, features with larger numerical ranges would dominate the clustering process. Since KMeans relies on Euclidean distance to group data points, this could bias the results.
+
+Standardization solves this issue by transforming all features to have a mean of 0 and a standard deviation of 1, allowing for fair and balanced clustering.
+
+```python
+scaler = StandardScaler()
+scaled = scaler.fit_transform(RFM)
+scaled
+scaled.shape
+```
+
+### 🔹 Step 11: Determine Optimal k Using the Elbow Method
+
+To find the ideal number of customer segments (clusters), I use the **Elbow Method**, which plots the **Sum of Squared Errors (SSE)** against a range of possible `k` values. The point where the SSE curve starts to flatten (like an elbow) is considered the optimal value of `k`.
+This step utilizes `KMeans` from `sklearn.cluster`.
+
+```python
+k_range = range(2, 11)
+sse = []  # Sum of Squared Errors
+
+for k in k_range:
+    km = KMeans(n_clusters=k, random_state=42)
+    km.fit(scaled)
+    sse.append(km.inertia_)
+sse
+```
+
+### 🔹 Step 12: Visualize Elbow Curve Using Matplotlib
+
+Before applying `KElbowVisualizer`, I plotted the Elbow Curve manually using `matplotlib.pyplot` to get a clear visual of how the **Sum of Squared Errors (SSE)** changes with different `k` values.
+
+```python
+fig, axes = plt.subplots(figsize=(8,6), facecolor="#E6F9FA")
+
+axes.plot(
+    k_range, sse,
+    color="purple",
+    lw=3,
+    ls='--',
+    marker='s',
+    markersize=8,
+    markerfacecolor="yellow",
+    markeredgewidth=3,
+    markeredgecolor="red"
+)
+
+plt.grid(True, linestyle='--', alpha=0.8)
+plt.tight_layout()
+plt.show()
+```
+
+### 🔹 Step 13: Visualize Optimal k Using KElbowVisualizer (Yellowbrick)
+
+To complement the manual elbow plot, I used **Yellowbrick's KElbowVisualizer** to automatically identify the optimal number of clusters (`k`) based on **distortion (SSE)**. 
+This step utilizes both `KElbowVisualizer` from `yellowbrick.cluster` and `KMeans` from `sklearn.cluster` to perform the visualizer.
+
+```python
+model = KMeans(random_state=42)
+elbow = KElbowVisualizer(
+    model,
+    k=(2, 10),
+    metric='distortion',
+    timings=True,           # Shows training time per k
+    locate_elbow=True,      # Automatically marks the elbow point
+    size=(700, 500)         # Resize the plot
+)
+
+elbow.fit(scaled)
+elbow.show()
+```
+
+### 🔹 Step 14: Fit Final KMeans Model Using Optimal k
+
+After determining that `k=4` is the optimal number of clusters using the Elbow Method, I applied KMeans clustering to the scaled RFM data.
+A KMeans model was initialized with `n_clusters=4` and `random_state=42` to ensure reproducible results. The model was then trained on the scaled RFM data. Subsequently, **cluster labels** were retrieved for each customer, with verification confirming that every customer received a cluster assignment.
+Each customer is now assigned to one of the four clusters, categorizing them based on their Recency, Frequency, and Monetary behavior.
+
+```python
+kmeans = KMeans(n_clusters=4, random_state=42)
+kmeans.fit(scaled)
+```
+kmeans.labels_
+kmeans.labels_.shape
 ```
