@@ -156,3 +156,59 @@ Lastrnxdate
 ```python
 Recency = Lastrnxdate.drop("Invoice Date", axis=1)
 ```
+
+### 🔹 Step 7: Calculate Frequency – Number of Purchases
+
+Frequency indicates how many times a customer made a purchase. To avoid counting the same invoice multiple times, we use unique invoice numbers for each customer.
+
+###### At First Checked the original dataset
+```python
+df
+```
+
+###### Grouped by Customer ID and counted the number of unique invoices per customer
+```python
+UniqueInvoice = df.drop_duplicates(subset="Invoice No")
+UniqueInvoice
+```
+
+###### Grouped by `Customer ID` to count the number of unique invoices and create the `Frequency` DataFrame representing each customer's total purchases.
+```python
+Frequency = UniqueInvoice.groupby(["Customer ID"]).count()[["Invoice No"]]
+Frequency
+```
+
+### 🔹 Step 8: Calculate Monetary – Total Amount Spent
+
+Monetary refers to the total amount a customer has spent. This step involves calculating the transaction value per row and summing it by customer.
+
+###### Ensures we're working with a safe, independent copy of the DataFrame. This avoids the `SettingWithCopyWarning` from pandas when modifying a sliced DataFrame.
+```python
+df = df.copy()
+```
+
+###### Calculates the `Monetary` value of each transaction and stores it in a new column called "Total".
+```python
+df.loc[:, "Total"] = df["Quantity"] * df["Unit Price"]
+```
+
+###### Grouped by `Customer ID` and summed up the "Total" column to create the Monetary DataFrame. This gives the total spending per customer across all their purchases.
+```python
+Monetary = df.groupby(["Customer ID"])[["Total"]].sum()
+Monetary
+```
+
+### 🔹 Step 9: Combine Recency, Frequency, and Monetary into RFM Table
+
+After calculating the three individual metrics, we combine them into a single DataFrame for customer segmentation analysis.
+
+###### Used pd.concat() to join the **Recency, Frequency,** and **Monetary** DataFrames side-by-side
+```python
+RFM = pd.concat([Recency, Frequency, Monetary], axis=1)
+```
+
+###### Renamed columns for clarity and standard naming convention
+```python
+RFM.columns = ['Recency', 'Frequency', 'Monetary']
+RFM
+```
