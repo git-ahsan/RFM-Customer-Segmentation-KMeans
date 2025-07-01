@@ -443,7 +443,7 @@ plt.show()
 ```
 #### 📷 Preview
 
-![Preview](https://github.com/git-ahsan/Global-Sales-Data-Analysis-2025/blob/main/Dashboard%20Preview.jpg)
+![Preview](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/Customer%20Group%20Distribution.png)
 
 ### 🔹 Step 22: Identify Highest and Lowest Monetary Value Customers by Segment
 
