@@ -104,13 +104,13 @@ To prepare for RFM (Recency, Frequency, Monetary) analysis, we must ensure the `
 df.tail(5)
 ```
 
-**Set a custom Current Date to calculate how recently each customer made a purchase**
+● Set a custom Current Date to calculate how recently each customer made a purchase
 ```python
 CurrentDate = pd.to_datetime("2011-01-01")
 CurrentDate
 ```
 
-**Converted Invoice Date from object to datetime64[ns] using pd.to_datetime(). Then Verified the conversion using .dtypes**
+● Converted Invoice Date from object to datetime64[ns] using pd.to_datetime(). Then Verified the conversion using .dtypes.
 ```python
 df["Invoice Date"] = pd.to_datetime(df["Invoice Date"])
 df.dtypes
@@ -120,17 +120,17 @@ df.dtypes
 
 Before performing RFM analysis, we must remove incomplete records. Customer ID is critical for segmentation, so entries without it are excluded.
 
-**At first checked initial dataset shape using .shape**
+● At first checked initial dataset shape using .shape
 ```python
 df.shape
 ```
 
-**Identified missing values in all columns using .isnull().sum(), where Found that some records had missing Customer ID and Product Description**
+● Identified missing values in all columns using .isnull().sum(), where Found that some records had missing Customer ID and Product Description.
 ```python
 df.isnull().sum()
 ```
 
-**Removed only those Customer ID records using dropna() and Re-checked dataset shape to confirm the number of valid entries**
+● Removed only those Customer ID records using dropna() and Re-checked dataset shape to confirm the number of valid entries
 ```python
 df = df.dropna(subset=["Customer ID"])
 df.shape
