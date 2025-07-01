@@ -120,18 +120,39 @@ df.dtypes
 
 Before performing RFM analysis, we must remove incomplete records. Customer ID is critical for segmentation, so entries without it are excluded.
 
-###### ● At first checked initial dataset shape using .shape
+###### At first checked initial dataset shape using .shape
 ```python
 df.shape
 ```
 
-###### ● Identified missing values in all columns using .isnull().sum(), where Found that some records had missing Customer ID and Product Description.
+###### Identified missing values in all columns using .isnull().sum(), where Found that some records had missing Customer ID and Product Description.
 ```python
 df.isnull().sum()
 ```
 
-###### ● Removed only those Customer ID records using dropna() and Re-checked dataset shape to confirm the number of valid entries
+###### Removed only those Customer ID records using dropna() and Re-checked dataset shape to confirm the number of valid entries
 ```python
 df = df.dropna(subset=["Customer ID"])
 df.shape
+```
+
+### 🔹 Step 6: Calculate `Recency` – Days Since Last Purchase
+
+Recency refers to how recently a customer made a purchase. In this step, we calculate the number of days since each customer's last transaction based on a fixed reference date.
+
+###### Grouped data by `Customer ID` and extracted the most recent `Invoice Date`
+```python
+Lastrnxdate = df.groupby(["Customer ID"]).max()[["Invoice Date"]]
+Lastrnxdate
+```
+
+###### Calculated `Invoice Age` by subtracting the last purchase date from the `CurrentDate`
+```python
+Lastrnxdate["Invoice Age"] = (CurrentDate - Lastrnxdate["Invoice Date"]).dt.days
+Lastrnxdate
+```
+
+###### Drop `Invoice Date` and Renamed the result as `Recency`, which represents the number of days since a customer's last transaction
+```python
+Recency = Lastrnxdate.drop("Invoice Date", axis=1)
 ```
