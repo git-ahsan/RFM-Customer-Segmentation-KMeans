@@ -322,3 +322,34 @@ RFM
 ```python
 RFM.Clusters.unique()
 ```
+
+### 🔹 Step 16: Visualize Customer Segments in 3D (RFM Clusters)
+
+To better understand the distribution of customer clusters, a 3D scatter plot was generated to visualize customer clusters based on their **Recency**, **Frequency**, and **Monetary** (RFM) values. This plot, created using matplotlib's 3D projection, maps Recency to the X-axis, Frequency to the Y-axis, and Monetary to the Z-axis. Each customer cluster is differentiated by color using the "Accent" colormap, allowing for a clear visual separation of segments across all three RFM dimensions. The axes are labeled and a grid is enabled to enhance readability, ultimately helping to validate the quality of the customer clustering.
+
+```python
+fig = plt.figure(figsize=(12, 9), facecolor="#E6F9FA")   #Creates Matplotlib figure with a light background.
+ax = fig.add_subplot(111, projection='3d', label="bla")   #adds a 3D subplot to the figure.
+
+######creates a 3D scatter plot of RFM data.
+scatter = ax.scatter(
+    RFM["Recency"], 
+    RFM["Frequency"], 
+    RFM["Monetary"], 
+    c=RFM["Clusters"], 
+    cmap="Accent", 
+    s=60, 
+    edgecolor='k', 
+    alpha=0.8
+) ######creates a 3D scatter plot of RFM data.
+
+######Titles and labels the 3D plot axes.
+ax.set_title("3D Clustering of Customers (RFM)", fontsize=16, fontweight='bold')
+ax.set_xlabel("Recency", fontsize=12, fontweight='bold')
+ax.set_ylabel("Frequency", fontsize=12, fontweight='bold')
+ax.set_zlabel("Monetary", fontsize=12, fontweight='bold')
+ax.grid(True)            #Titles and labels the 3D plot axes.
+
+plt.tight_layout()
+plt.show()
+```
