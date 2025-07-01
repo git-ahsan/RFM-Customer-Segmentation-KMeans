@@ -99,7 +99,7 @@ df.dtypes
 
 To prepare for RFM (Recency, Frequency, Monetary) analysis, we must ensure the `Invoice Date` column is in datetime format. We also set a fixed reference date (`CurrentDate`) to calculate **Recency** later on.
 
-**Used .tail() to inspect the last few transactions**
+● Used .tail() to inspect the last few transactions
 ```python
 df.tail(5)
 ```
