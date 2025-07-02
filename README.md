@@ -467,3 +467,21 @@ ABC = RFM[RFM.Clusters == 1]
 ABC[ABC['Monetary'] == ABC['Monetary'].min()]  # Lowest spender in Cluster 1 (Bronze)
 ABC[ABC['Monetary'] == ABC['Monetary'].max()]  # Highest spender in Cluster 1 (Bronze)
 ```
+---
+## 📌 6. Results & Visualizations
+
+The RFM analysis and KMeans clustering algorithm successfully segmented the retail customers into four distinct groups: **Diamond, Gold, Silver, and Bronze**. These segments were based on their Recency (how recently they purchased), Frequency (how often they purchased), and Monetary (how much they spent) behavior.
+
+Key visualizations were created to illustrate and support the results:
+
+- 🎯 **3D Cluster Plot**: Showcased how customers are grouped in the RFM space, validating that the clusters are well-separated.
+- 📊 **Bar Chart (Log Scale)**: Displayed the customer count in each group, scaled logarithmically to better show group differences.
+- 🍩 **Donut Chart (Percentage)**: Visualized the proportional distribution of customers across segments.
+- 📋 **Cluster Profile Table**: Showed average RFM values for each cluster, helping identify high-value vs. low-value segments.
+
+These visual insights confirmed that:
+- **Diamond customers** (Cluster 2) are highly valuable: they purchase frequently, spend more, and return often.
+- **Gold and Silver groups** reflect moderate customer behavior and represent potential upsell targets.
+- **Bronze customers** (Cluster 1) are least engaged — strategies like reactivation campaigns or offers may improve retention.
+
+The visual tools helped interpret and communicate the clustering results clearly for stakeholders or business use cases.
