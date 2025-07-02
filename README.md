@@ -62,8 +62,6 @@ From this dataset, **RFM (Recency, Frequency, Monetary)** features were derived 
 
 This project follows a structured pipeline to perform customer segmentation using RFM analysis and KMeans clustering:
 
----
-
 ### 🔹 Step 1: Importing Required Libraries
 
 In this step, we import all the essential Python libraries and modules required for data loading, analysis, visualization, and clustering.
@@ -268,6 +266,9 @@ plt.grid(True, linestyle='--', alpha=0.8)
 plt.tight_layout()
 plt.show()
 ```
+#### 📷 Preview
+
+![Preview](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/Visualization%20Charts/Elbow%20Curve.jpg)
 
 ### 🔹 Step 13: Visualize Optimal k Using KElbowVisualizer (Yellowbrick)
 
@@ -288,6 +289,9 @@ elbow = KElbowVisualizer(
 elbow.fit(scaled)
 elbow.show()
 ```
+#### 📷 Preview
+
+![Preview](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/Visualization%20Charts/KElbowVisualizer.jpg)
 
 ### 🔹 Step 14: Fit KMeans Model with Optimal Number of Clusters-k
 
@@ -353,6 +357,9 @@ ax.grid(True)            #Titles and labels the 3D plot axes.
 plt.tight_layout()
 plt.show()
 ```
+#### 📷 Preview
+
+![Preview](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/Visualization%20Charts/3D.jpg)
 
 ### 🔹 Step 17: Analyze and Profile Each Customer Cluster
 
@@ -443,7 +450,7 @@ plt.show()
 ```
 #### 📷 Preview
 
-![Preview](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/Customer%20Group%20Distribution.png)
+![Preview](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/Visualization%20Charts/Customer%20Group%20Distribution.png)
 
 ### 🔹 Step 22: Identify Highest and Lowest Monetary Value Customers by Segment
 
