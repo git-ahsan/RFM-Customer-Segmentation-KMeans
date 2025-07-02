@@ -521,12 +521,11 @@ The repository contains all relevant files and notebooks used to perform Retail 
 
 ├── [RFM.ipynb](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/RFM.ipynb) # Jupyter Notebook with full RFM & KMeans workflow
 
-├── Retail Customer Data 2009-10.csv # Original dataset used for analysis
+├── [Retail Customer Data 2009-10.csv](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/Retail%20Customer%20Data%202009-10.zip) # Original dataset used for analysis
 
-├── images/ # Folder for visualizations (optional: for use in README or reports)
+├── [README.md](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/README.md) # Project documentation
 
-├── README.md # Project documentation
-
+├── [Visualization Charts/](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/tree/main/Visualization%20Charts) # Folder for visualizations (optional: for use in README or reports)
 
 ### 📌 Notes:
 - The main analysis is performed in `RFM.ipynb`, following a step-by-step methodology from data preprocessing to model training and visualization.
