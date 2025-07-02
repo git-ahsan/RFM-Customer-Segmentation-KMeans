@@ -542,3 +542,15 @@ This project provided hands-on experience in applying data science techniques to
 
 > This project deepened my confidence in data science and strengthened both my technical and business analytical thinking.
 ---
+## 📬 Contact
+
+**Md. Ahsan Ul Islam**
+🎓 Junior Data Analyst
+🔗 [LinkedIn](https://www.linkedin.com/in/md-ahsan-ul-islam)  
+🔗 [GitHub](https://github.com/git-ahsan)
+
+---
+
+## 🏷️ Tags
+
+`#Python` `#DataScience` `#BusinessIntelligence` `#MachineLearning` `#RFM` `#CustomerSegmentation` `#ScikitLearn` `#GitHubPortfolio` `DataManipulation` `Pandas` `Numericaloperations` `NumPy` `DataVisualization` `Matplotlib` `Seaborn` `KMeans` `Yellowbrick` `JupyterNotebook`
