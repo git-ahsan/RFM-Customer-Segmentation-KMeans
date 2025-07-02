@@ -128,7 +128,7 @@ df.shape
 df.isnull().sum()
 ```
 
-###### Removed only those Customer ID records using dropna() and Re-checked dataset shape to confirm the number of valid entries
+###### Two records contained null values in the `Customer ID` and `Product Description` fields. Since `Customer ID` is essential for customer-level analysis, only those rows with missing `Customer ID` were removed using `dropna()`. The dataset shape was then re-checked to confirm the number of valid entries.
 ```python
 df = df.dropna(subset=["Customer ID"])
 df.shape
@@ -543,11 +543,28 @@ This project provided hands-on experience in applying data science techniques to
 - 💡 Developed confidence in **end-to-end project handling** — from data loading and exploration to modeling, visualization, and documentation.
 
 > This project deepened my confidence in data science and strengthened both my technical and business analytical thinking.
+
 ---
-## 📬 Contact
+
+## 🚀 10. Future Work / Improvements
+
+While this project successfully segments customers using RFM analysis and KMeans clustering, there are several opportunities to enhance and expand the work:
+
+- 🔄 **Dynamic RFM Analysis**: Incorporate time-series features to make the segmentation more responsive to changing customer behavior.
+- 🧠 **Alternative Clustering Algorithms**: Explore other clustering techniques such as DBSCAN or Hierarchical Clustering for comparison and validation.
+- 🎯 **Automated Segment Labeling**: Use rule-based or ML-based techniques to auto-label clusters based on behavior instead of manual assignment.
+- 📊 **Dashboard Integration**: Build an interactive dashboard using Power BI, Tableau, or Plotly Dash to allow business users to explore segment insights in real-time.
+- 🧪 **AB Testing and Campaign Tracking**: Design marketing strategies for each segment and track real-world performance to refine targeting.
+- 📈 **Customer Lifetime Value (CLV)**: Extend the analysis by predicting CLV to make long-term revenue-driven decisions.
+- 🌐 **Deployment as a Web App**: Deploy the entire workflow as a user-facing tool where businesses can upload data and view segmentation results directly.
+
+> 🎯 Although currently at a beginner level, I plan to explore areas like **Customer Lifetime Value (CLV)**, **dynamic RFM scoring**, and **deployment techniques** in future projects to enhance segmentation accuracy and business impact.
+
+---
+## 📬 Contact & Portfolio Links
 
 **Md. Ahsan Ul Islam**  
-🎓 Junior Data Analyst  
+🎓 Aspiring Data Analyst  
 🔗 [LinkedIn](https://www.linkedin.com/in/md-ahsan-ul-islam)  
 🔗 [GitHub](https://github.com/git-ahsan)
 
@@ -555,4 +572,6 @@ This project provided hands-on experience in applying data science techniques to
 
 ## 🏷️ Tags
 
-`#Python` `#DataScience` `#BusinessIntelligence` `#MachineLearning` `#RFM` `#CustomerSegmentation` `#ScikitLearn` `#GitHubPortfolio` `#DataManipulation` `#Pandas` `#Numericaloperations` `#NumPy` `#DataVisualization` `#Matplotlib` `#Seaborn` `#KMeans` `#Yellowbrick` `#JupyterNotebook`
+`#Python` `#DataScience` `#BusinessIntelligence` `#MachineLearning` `#RFM` `#CustomerSegmentation`  
+`#ScikitLearn` `#Pandas` `#NumPy` `#KMeans` `#Clustering` `#ElbowMethod`  
+`#DataVisualization` `#Matplotlib` `#Seaborn` `#Yellowbrick` `#JupyterNotebook`
