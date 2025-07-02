@@ -553,4 +553,4 @@ This project provided hands-on experience in applying data science techniques to
 
 ## 🏷️ Tags
 
-`#Python` `#DataScience` `#BusinessIntelligence` `#MachineLearning` `#RFM` `#CustomerSegmentation` `#ScikitLearn` `#GitHubPortfolio` `DataManipulation` `Pandas` `Numericaloperations` `NumPy` `DataVisualization` `Matplotlib` `Seaborn` `KMeans` `Yellowbrick` `JupyterNotebook`
+`#Python` `#DataScience` `#BusinessIntelligence` `#MachineLearning` `#RFM` `#CustomerSegmentation` `#ScikitLearn` `#GitHubPortfolio` `#DataManipulation` `#Pandas` `#Numericaloperations` `#NumPy` `#DataVisualization` `#Matplotlib` `#Seaborn` `#KMeans` `#Yellowbrick` `#JupyterNotebook`
