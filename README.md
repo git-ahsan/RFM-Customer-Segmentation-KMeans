@@ -1,5 +1,7 @@
 # Retail Customer Segmentation Using RFM Analysis and KMeans Clustering (Ongoing Project) 
 
+## 📄 1. Project Summary
+
 This project focuses on segmenting retail customers using **RFM analysis** (Recency, Frequency, Monetary) combined with **KMeans clustering**. By analyzing customer purchase behavior from a transactional dataset, distinct customer segments were identified and labeled (e.g., Diamond, Gold, Silver, Bronze). The goal is to help businesses implement targeted marketing strategies, improve customer retention, and maximize profitability using data-driven insights.
 
 ---
