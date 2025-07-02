@@ -544,8 +544,8 @@ This project provided hands-on experience in applying data science techniques to
 ---
 ## 📬 Contact
 
-**Md. Ahsan Ul Islam** 
-🎓 Junior Data Analyst  
+**Md. Ahsan Ul Islam**
+ 🎓 Junior Data Analyst  
 🔗 [LinkedIn](https://www.linkedin.com/in/md-ahsan-ul-islam)  
 🔗 [GitHub](https://github.com/git-ahsan)
 
