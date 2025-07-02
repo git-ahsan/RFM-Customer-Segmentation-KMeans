@@ -519,9 +519,12 @@ Based on the RFM-KMeans clustering results, the customer base can be divided int
 
 The repository contains all relevant files and notebooks used to perform Retail Customer Segmentation using RFM analysis and KMeans clustering.
 
-├── RFM.ipynb # Jupyter Notebook with full RFM & KMeans workflow
+├── [RFM.ipynb](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/RFM.ipynb) # Jupyter Notebook with full RFM & KMeans workflow
+
 ├── Retail Customer Data 2009-10.csv # Original dataset used for analysis
+
 ├── images/ # Folder for visualizations (optional: for use in README or reports)
+
 ├── README.md # Project documentation
 
 
