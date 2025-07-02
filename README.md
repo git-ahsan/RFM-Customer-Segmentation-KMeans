@@ -564,7 +564,7 @@ While this project successfully segments customers using RFM analysis and KMeans
 ## 📬 Contact & Portfolio Links
 
 **Md. Ahsan Ul Islam**  
-🎓 Aspiring Data Analyst  
+🎓 Entry-Level Data Analyst | Skilled in Python, SQL & Power BI | Aspiring Data Scientist with Hands-On ML Project Experience  
 🔗 [LinkedIn](https://www.linkedin.com/in/md-ahsan-ul-islam)  
 🔗 [GitHub](https://github.com/git-ahsan)
 
