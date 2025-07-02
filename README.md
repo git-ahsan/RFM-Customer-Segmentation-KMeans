@@ -7,10 +7,15 @@ This project focuses on segmenting retail customers using **RFM analysis** (Rece
 ## 🎯 2. Project Objective
 
 The primary objective of this project is to:
+
 📊 Understand customer behavior through **RFM metrics**
+
 ✂️ Segment customers based on their transactional patterns
+
 🔍 Apply **KMeans clustering** to identify hidden groups
+
 📈 Visualize and interpret each segment
+
 🚀 Deliver actionable recommendations for **personalized marketing and customer relationship management**
 
 ---
@@ -28,7 +33,7 @@ The project was developed using the following tools and libraries:
 
 ---
 ## 📊 4. Dataset Description
-📁 CSV File: [Retail Customer Data]
+
 The dataset used in this project is transactional retail data collected between **2009 and 2010**. It contains information about customer purchases, including invoice details, product quantities, unit prices, and customer IDs.
 Key characteristics:
 - **Total Records:** ~500,000 transactions
@@ -49,39 +54,9 @@ Key characteristics:
 - ⚠️ Missing values were handled by dropping rows where `Customer ID` was null.
 - 📌 This dataset is well-suited for RFM analysis because it includes **purchase dates**, **quantities**, and **prices**, which are essential for calculating Recency, Frequency, and Monetary values.
 
-
-## 📊 Dataset Description
-
-📁 CSV File: [Retail Customer Data]
-
-The dataset used in this project is a **retail transaction dataset** containing historical sales data from an online retailer between **December 1, 2009** and **December 9, 2010**.
-
-Key characteristics:
-
-- **Total Records:** ~500,000 transactions
-- **File Name:** [Retail Customer Data 2009-10.csv](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/Retail%20Customer%20Data%202009-10.zip)
-- **Format:** CSV
-
-### Features:
-
-| Column Name     | Description                                                                 |
-|-----------------|-----------------------------------------------------------------------------|
-| `Invoice No`     | Unique identifier for each transaction                                      |
-| `Stock Code`     | Product (item) code                                                         |
-| `Product Description`   | Product name                                                                |
-| `Quantity`      | The number of items purchased per transaction                               |
-| `Invoice Date`   | Date and time when the invoice was generated                                |
-| `Unit Price`     | Price per unit of the product                                               |
-| `Customer ID`    | Unique customer identifier                                                  |
-| `Country`       | Country name where the customer resides                                     |
-
-> 🛠️ Note: Rows with missing `CustomerID` were dropped to ensure clean customer segmentation.
-
-From this dataset, **RFM (Recency, Frequency, Monetary)** features were derived to perform customer segmentation analysis using clustering techniques.
-
 ---
 
-## 📈 Methodology / Workflow
+## 📈 5. Methodology / Workflow
 
 This project follows a structured pipeline to perform customer segmentation using RFM analysis and KMeans clustering:
 
