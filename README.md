@@ -575,6 +575,8 @@ plt.ylabel("Score", fontsize=12, fontweight='bold')
 plt.tight_layout()
 plt.show()
 ```
+![Preview](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/Visualization%20Charts/Diamond.jpg)
+
 ---
 ## 📌 6. Results & Visualizations
 
