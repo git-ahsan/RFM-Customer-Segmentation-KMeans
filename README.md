@@ -452,20 +452,128 @@ plt.show()
 
 ![Preview](https://github.com/git-ahsan/RFM-Customer-Segmentation-KMeans/blob/main/Visualization%20Charts/Customer%20Group%20Distribution.png)
 
-### 🔹 Step 22: Identify Highest and Lowest Monetary Value Customers by Segment
+### 🔹 Step 22: Deep Dive into Diamond Segment (Cluster 2)
 
-To explore spending extremes within customer segments, the dataset was filtered by cluster and sorted by the Monetary value. This helped identify both the highest-value and lowest-value customers within specific groups, such as Cluster 2 (Diamond) and Cluster 1 (Bronze). These insights are useful for designing personalized loyalty programs, upselling strategies, or retention efforts targeting high- and low-value customers individually.
+To gain more insight into the high-value Diamond segment (Cluster 2), the dataset was filtered to explore customers at the two extremes of spending. This helped identify the highest spender and the least active spender within the group. Such outlier analysis can be valuable for personalized engagement strategies, loyalty programs, or even fraud checks in real-world applications.
 
 ```python
-### Analyze Cluster 2 (Diamond)
 ABC = RFM[RFM.Clusters == 2]
-ABC[ABC['Monetary'] == ABC['Monetary'].min()]  # Lowest spender in Cluster 2 (Diamond)
-ABC[ABC['Monetary'] == ABC['Monetary'].max()]  # Highest spender in Cluster 2 (Diamond)
 
-# Analyze Cluster 1 (Bronze)
-ABC = RFM[RFM.Clusters == 1]
-ABC[ABC['Monetary'] == ABC['Monetary'].min()]  # Lowest spender in Cluster 1 (Bronze)
-ABC[ABC['Monetary'] == ABC['Monetary'].max()]  # Highest spender in Cluster 1 (Bronze)
+# Identify customer with the lowest spending in the Diamond group
+ABC[ABC['Monetary'] == ABC['Monetary'].min()]
+
+# Identify customer with the highest spending in the Diamond group
+ABC[ABC['Monetary'] == ABC['Monetary'].max()]
+```
+
+### 🔹 Step 23: Extract Customers from Diamond Segment
+
+To prepare for targeted marketing or personalized campaigns, the dataset was filtered to extract all customers assigned to the “Diamond” segment — those with the most frequent, recent, and high-spending behaviors. This subset represents the business’s top-tier customers and can be used for loyalty programs, VIP offers, or high-priority retention strategies.
+
+```python
+diamond_customers = RFM[RFM["Group"] == "Diamond"]
+diamond_customers
+```
+
+### 🔹 Step 24: Normalize Diamond Segment RFM Values
+
+To prepare the Diamond segment data for consistent comparison and visualization, the RFM values were scaled between 0 and 1 using **MinMaxScaler** from `sklearn.preprocessing`. This ensures that each feature (Recency, Frequency, and Monetary) contributes equally and is not skewed by differing ranges. Normalization is especially useful before plotting radar charts or when feeding the data into models or scoring systems that require uniform feature scales.
+
+```python
+scaler = MinMaxScaler()
+normalized = scaler.fit_transform(diamond_customers[["Recency", "Frequency", "Monetary"]])
+normalized
+```
+
+### 🔹 Step 25: Create DataFrame for Normalized RFM Values
+
+The normalized RFM values for Diamond customers were converted into a new DataFrame named `diamond_normalized`, with appropriate column names and original customer indices preserved. This structure makes it easy to analyze, visualize, or merge with other data sources for deeper insights or targeted actions on high-value customers.
+
+```python
+diamond_normalized = pd.DataFrame(normalized, columns=["Recency_N", "Frequency_N", "Monetary_N"], index=diamond_customers.index)
+diamond_normalized
+```
+
+### 🔹 Step 26: Calculate Weighted Score for Diamond Customers
+
+To prioritize customers within the high-value Diamond segment, a weighted score was calculated using the normalized RFM values. Recency was inverted (since lower is better), and custom weights were applied: 25% for Recency, 25% for Frequency, and 50% for Monetary value — giving more importance to spending behavior. This scoring system helps identify top-tier customers within the elite group for exclusive campaigns or relationship management.
+
+```python
+diamond_customers = diamond_customers.copy()
+
+diamond_customers["Score"] = (
+    (1 - diamond_normalized["Recency_N"]) * 0.25 +  # Lower recency = better
+    diamond_normalized["Frequency_N"] * 0.25 +
+    diamond_normalized["Monetary_N"] * 0.50
+)
+```
+
+### 🔹 Step 27: Rank Diamond Customers by Score
+
+To finalize the prioritization of customers in the Diamond segment, a ranking column was added based on the calculated Score. Customers were ranked in descending order, with rank 1 representing the most valuable individual in the group. This ranking enables targeted engagement, top-tier reward programs, or focused retention efforts on the highest contributors.
+
+```python
+diamond_customers["Diamond_Rank"] = diamond_customers["Score"].rank(ascending=False).astype(int)
+```
+
+### 🔹 Step 28: Sort Diamond Customers by Rank
+
+The `diamond_customers` DataFrame was sorted in ascending order by the `Diamond_Rank` column to place the **most valuable customers at the top**. This final view enables easy extraction of the top-tier customers for exclusive targeting, strategic engagement, or exporting to external tools like Power BI or CRM systems.
+
+```python
+diamond_customers_sorted = diamond_customers.sort_values("Diamond_Rank")
+diamond_customers_sorted
+```
+
+### 🔹 Step 29: Final View of Ranked Diamond Customers
+
+Displayed a clean, focused summary of the ranked Diamond customers, showing each customer’s priority rank, calculated score, and original RFM metrics. This final view enables stakeholders to quickly identify and understand the top-performing customers, making it ideal for reporting, executive dashboards, or direct action via marketing or loyalty initiatives.
+
+```python
+diamond_customers_sorted[["Diamond_Rank", "Score", "Recency", "Frequency", "Monetary"]]
+```
+
+### 🔹 Step 30: Visualize Ranked Diamond Customers with Score and ID
+
+A bar chart was created to visually rank Diamond customers based on their composite RFM scores. Each bar represents a customer’s score, with the Customer ID displayed above the bar for easy identification. This plot offers a quick, intuitive overview of the top-tier customers and can be used in presentations, dashboards, or performance tracking reports to communicate which customers contribute the most value to the business.
+
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Prepare the figure
+plt.figure(figsize=(10, 6), facecolor="#F7FAFC")
+
+Rank = diamond_customers_sorted["Diamond_Rank"]
+Score = diamond_customers_sorted["Score"]
+
+# Create barplot
+barplot = sns.barplot(
+    x=Rank,
+    y=Score,
+    hue=Rank,
+    palette="viridis",
+    legend=False
+)
+
+# Add Customer ID labels on top of bars
+for index, row in diamond_customers_sorted.iterrows():
+    barplot.text(
+        x=row["Diamond_Rank"] - 1,
+        y=row["Score"] + 0.01,
+        s=str(index),
+        ha='center',
+        fontsize=10,
+        fontweight='bold',
+        color='black'
+    )
+
+# Styling
+plt.title("Diamond Customers Ranked by Composite RFM Score", fontsize=16, fontweight='bold', color='navy')
+plt.xlabel("Customer Rank", fontsize=12, fontweight='bold')
+plt.ylabel("Score", fontsize=12, fontweight='bold')
+plt.tight_layout()
+plt.show()
 ```
 ---
 ## 📌 6. Results & Visualizations
