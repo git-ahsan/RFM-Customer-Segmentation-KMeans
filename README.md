@@ -1,4 +1,4 @@
-# Retail Customer Segmentation Using RFM Analysis and KMeans Clustering (Ongoing Project) 
+# Retail Customer Segmentation Using RFM Analysis and KMeans Clustering
 
 ## 📄 1. Project Summary
 
