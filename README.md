@@ -494,16 +494,20 @@ diamond_normalized = pd.DataFrame(normalized, columns=["Recency_N", "Frequency_N
 diamond_normalized
 ```
 
-### 🔹 Step 26: Calculate Weighted Score for Diamond Customers
+### Step 26: Calculate Weighted Score for Diamond Customers  
+To prioritize customers within the high-value Diamond segment, we computed a weighted score using normalized RFM values. Recency was inverted (lower values = better) and custom weights were applied:  
+- **30% Recency** (prioritizing recent purchases),  
+- **20% Frequency** (moderate emphasis on loyalty),  
+- **50% Monetary** (maximum focus on spending behavior).  
 
-To prioritize customers within the high-value Diamond segment, a weighted score was calculated using the normalized RFM values. Recency was inverted (since lower is better), and custom weights were applied: 25% for Recency, 25% for Frequency, and 50% for Monetary value — giving more importance to spending behavior. This scoring system helps identify top-tier customers within the elite group for exclusive campaigns or relationship management.
+This optimized weighting identifies top-tier Diamond customers for exclusive campaigns, balancing revenue potential with engagement.  
 
 ```python
 diamond_customers = diamond_customers.copy()
 
 diamond_customers["Score"] = (
-    (1 - diamond_normalized["Recency_N"]) * 0.25 +  # Lower recency = better
-    diamond_normalized["Frequency_N"] * 0.25 +
+    (1 - diamond_normalized["Recency_N"]) * 0.30 +  # Inverted for lower=better
+    diamond_normalized["Frequency_N"] * 0.20 +
     diamond_normalized["Monetary_N"] * 0.50
 )
 ```
